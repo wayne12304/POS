@@ -1,2 +1,2 @@
-# POS
-POS C++ hw
+# POSD
+POSD hw1
