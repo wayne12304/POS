@@ -20,7 +20,7 @@ bool Variable::assignable() {
 	return _assignable;
 } // assignable()
   
-bool Variable::match( Atom atom ) {
+bool Variable::match( Atom &atom ) {
 	if ( value() == atom.symbol() )
 		return true;
 	bool ret = _assignable;
@@ -32,7 +32,7 @@ bool Variable::match( Atom atom ) {
     return ret;
 } // match()
 
-bool Variable::match( Number num ) {
+bool Variable::match( Number &num ) {
 	if ( value() == num.value() )
 		return true;
 	bool ret = _assignable;
