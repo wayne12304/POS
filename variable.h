@@ -18,8 +18,8 @@ public:
   
   void setValue( string v );
   
-  bool match( Atom atom );
-  bool match( Number num );
+  bool match( Atom &atom );
+  bool match( Number &num );
 
 private:
   string _value;
