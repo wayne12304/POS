@@ -1,9 +1,9 @@
 #ifndef UTTERM_H
 #define UTTERM_H
 
-#include "include/variable.h"
-#include "include/atom.h"
-#include "include/number.h"
+#include "variable.h"
+#include "atom.h"
+#include "number.h"
 
 //test Number.value()
 TEST (Number, ctor) {
