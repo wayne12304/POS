@@ -15,13 +15,13 @@ endif
 mainTerm.o: mainTerm.cpp utTerm.h
 	g++ -std=gnu++0x -c mainTerm.cpp
 	
-number.o: $(INC_DIR)/number.h number.cpp
+number.o: number.h number.cpp
 	g++ -std=gnu++0x -c number.cpp
 	
-atom.o: $(INC_DIR)/atom.h atom.cpp
+atom.o: atom.h atom.cpp
 	g++ -std=gnu++0x -c atom.cpp
 	
-variable.o: $(INC_DIR)/variable.h variable.cpp
+variable.o: variable.h variable.cpp
 	g++ -std=gnu++0x -c variable.cpp
 
 
