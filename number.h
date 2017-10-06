@@ -18,7 +18,7 @@ class Number {
 	
 	bool match( Number num );
 	bool match( Atom atom );
-	bool match( Variable variable );
+	bool match( Variable &variable );
      
   private:
 	int _value;
