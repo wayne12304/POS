@@ -22,7 +22,7 @@ bool Number::match( Number num ) {
 } // match()
 	
 bool Number::match( Atom atom ) {
-	return true;
+	return false;
 } // match()
 
 bool Number::match( Variable variable ) {
