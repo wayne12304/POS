@@ -25,7 +25,7 @@ bool Number::match( Atom atom ) {
 	return false;
 } // match()
 
-bool Number::match( Variable variable ) {
+bool Number::match( Variable &variable ) {
 	if ( variable.value() == value() )
 		return true;
 	bool ret = variable.assignable();
