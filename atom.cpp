@@ -13,8 +13,10 @@ string Atom::symbol() const{
 } // symbol()
 
 bool Atom::match(Term & term) {
-  Variable * ps = dynamic_cast<Variable *> (&term);
-  if ( ps ) return true;
   return value() == term.value();
+}
+
+bool Atom::match(Variable & var) {
+  return var.match(*this);
 }
 
