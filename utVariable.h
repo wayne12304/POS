@@ -18,7 +18,8 @@ TEST(Variable, constructor){
 TEST(Variable , matching){
   Atom tom("tom");
   Variable X("X");
-  X.match(tom);
+  //X.match(tom);
+  ASSERT_TRUE(tom.match(X));
   ASSERT_EQ( "tom", X.value());
 }
 

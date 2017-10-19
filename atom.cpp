@@ -19,4 +19,3 @@ bool Atom::match(Term & term) {
 bool Atom::match(Variable & var) {
   return var.match(*this);
 }
-
