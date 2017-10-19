@@ -3,6 +3,7 @@
 
 #include <string>
 #include "term.h"
+#include "variable.h"
 
 class Term;
 
@@ -12,12 +13,10 @@ class Number : public Term {
   public:
 	Number( double value );
 	
-	//string value() const;
     string symbol() const;
-	
-	//bool match( Number num );
-	//bool match( Atom atom );
-	//bool match( Variable &variable );
+	bool match(Variable & var) ;
+
+	bool match(Term & term);
      
   private:
 	double _value;

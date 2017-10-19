@@ -23,10 +23,11 @@ string Number::symbol() const {
 	
 } // value()
 
-/*
-string Number::symbol() const {
-	return value();
-} // symbol()
+bool Number::match(Variable & var) {
+  return var.match(*this);
+}
 
-*/
+bool Number::match(Term & term) {
+  return value() == term.value();
+}
 
