@@ -18,9 +18,9 @@ TEST(Variable, constructor){
 TEST(Variable , matching){
   Atom tom("tom");
   Variable X("X");
-  //X.match(tom);
-  ASSERT_TRUE(tom.match(X));
-  ASSERT_EQ( "tom", X.value());
+  
+  ASSERT_TRUE(X.match(tom));
+  ASSERT_EQ("tom", X.value());
 }
 
 TEST (Variable , haveValue){
@@ -28,7 +28,6 @@ TEST (Variable , haveValue){
   Atom jerry ("jerry");
   Variable X("X");
   ASSERT_TRUE(X.match(tom));
-  ASSERT_FALSE(X.assignable());
   ASSERT_FALSE(X.match(jerry));
 }
 
@@ -162,8 +161,8 @@ TEST (Variable, Struct2) {
 
   ASSERT_EQ("Y", Y.symbol());
   
-  // ASSERT_EQ("s(teddy)", s.value());
-  ASSERT_EQ("s(teddy)", Y.value());
+  ASSERT_EQ("s(teddy)", s.value());
+  //ASSERT_EQ("s(teddy)", Y.value());
 }
 
 #endif

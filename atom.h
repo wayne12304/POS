@@ -4,8 +4,7 @@
 #include <string>
 #include "term.h"
 #include "variable.h"
-//class Variable;
-//class Number;
+
 class Term;
 
 using std::string;
