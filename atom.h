@@ -14,7 +14,7 @@ public:
   Atom (string s);
   
   string symbol()const;
-  bool Atom::match(Term & term);
+  bool match(Term & term);
 
 private:
   string _symbol;
