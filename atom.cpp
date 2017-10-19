@@ -1,6 +1,7 @@
 
 #include "atom.h"
 #include "term.h"
+#include "variable.h"
 #include <string>
 
 using std::string;
@@ -11,23 +12,9 @@ string Atom::symbol() const{
 	return _symbol;
 } // symbol()
 
-/*  
-bool Atom::match( Atom atom ) {
-	return atom.symbol() == symbol();
-} // match() 
-  
-bool Atom::match( Number num ) {
-    return false;
-} // match() 
-  
-bool Atom::match( Variable &variable ) {
-	if ( variable.value() == symbol() )
-		return true;
-	bool ret = variable.assignable();
-	if ( variable.assignable() ) {
-        variable.setValue( symbol() );
-    } // if
-        
-    return ret;
-} // match() 
-*/
+bool Atom::match(Term & term) {
+  Variable * ps = dynamic_cast<Variable *> (_term);
+  if ( ps ) return true;
+  return value() == term.value();
+}
+
