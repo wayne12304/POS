@@ -14,9 +14,6 @@ class Number : public Term {
 	Number( double value );
 	
     string symbol() const;
-	bool match(Variable & var) ;
-
-	bool match(Term & term);
      
   private:
 	double _value;
