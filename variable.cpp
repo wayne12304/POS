@@ -100,7 +100,7 @@ bool Variable::match( Term &term ) {
 
 string Variable::value() const { 
 	if ( _term == NULL )
-		return "";
+		return symbol();
 	return _term->value();
 } // value()
   
