@@ -13,5 +13,5 @@ string Term::value() const {
 };
 
 bool Term::match(Term & term) {
-  return symbol() == term.symbol();
+  return value() == term.value();
 }
