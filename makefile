@@ -1,39 +1,30 @@
 INC_DIR = include
 
-all: hw3
+all: hw4
 
 
-hw3: mainTerm.o atom.o term.o number.o variable.o struct.o
+hw4: mainList.o atom.o list.o
 
 ifeq (${OS}, Windows_NT)
-	g++ -o hw3 mainTerm.o atom.o term.o number.o variable.o struct.o -lgtest
+	g++ -o hw4 mainList.o atom.o list.o -lgtest
 else
-	g++ -o hw3 mainTerm.o atom.o term.o number.o variable.o struct.o -lgtest -lpthread
+	g++ -o hw4 mainList.o atom.o list.o -lgtest -lpthread
 endif
 
 
-mainTerm.o: mainTerm.cpp utStruct.h utTerm.h
-	g++ -std=gnu++0x -c mainTerm.cpp
+mainList.o: mainList.cpp utList.h
+	g++ -std=gnu++0x -c mainList.cpp
 	
-atom.o: atom.h atom.cpp
+atom.o: atom.h atom.cpp variable.h struct.h
 	g++ -std=gnu++0x -c atom.cpp
 	
-term.o: term.h term.cpp
-	g++ -std=gnu++0x -c term.cpp
+list.o: list.h list.cpp
+	g++ -std=gnu++0x -c list.cpp
 	
-number.o: number.h number.cpp
-	g++ -std=gnu++0x -c number.cpp
-	
-variable.o: variable.h variable.cpp
-	g++ -std=gnu++0x -c variable.cpp
-	
-struct.o: struct.h struct.cpp
-	g++ -std=gnu++0x -c struct.cpp
-
 
 clean:
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o hw3
+	rm -f *.o hw4
 endif
