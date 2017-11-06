@@ -12,7 +12,7 @@ else
 endif
 
 
-mainParser.o: mainParser.cpp utParser.h 
+mainParser.o: mainParser.cpp utParser.h
 	g++ -std=gnu++0x -c mainParser.cpp
 	
 atom.o: atom.h atom.cpp variable.h struct.h scanner.h parser.h
