@@ -1,21 +1,21 @@
 INC_DIR = include
 
-all: hw4
+all: hw5
 
 
-hw4: mainList.o atom.o list.o
+hw5: mainParser.o atom.o list.o
 
 ifeq (${OS}, Windows_NT)
-	g++ -o hw4 mainList.o atom.o list.o -lgtest
+	g++ -o hw5 mainParser.o atom.o list.o -lgtest
 else
-	g++ -o hw4 mainList.o atom.o list.o -lgtest -lpthread
+	g++ -o hw5 mainParser.o atom.o list.o -lgtest -lpthread
 endif
 
 
-mainList.o: mainList.cpp utList.h
-	g++ -std=gnu++0x -c mainList.cpp
+mainParser.o: mainParser.cpp utParser.h
+	g++ -std=gnu++0x -c mainParser.cpp
 	
-atom.o: atom.h atom.cpp variable.h struct.h
+atom.o: atom.h atom.cpp variable.h struct.h scanner.h parser.h
 	g++ -std=gnu++0x -c atom.cpp
 	
 list.o: list.h list.cpp
@@ -26,5 +26,5 @@ clean:
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o hw4
+	rm -f *.o hw5
 endif
