@@ -9,6 +9,8 @@ using std::string;
 
 class Struct: public Term {
 public:
+  Struct(Atom name): _name(name) {};
+  
   Struct(Atom name, std::vector<Term *> args): _name(name) {
     _args = args;
   }
@@ -22,6 +24,7 @@ public:
   }
   string symbol() const {
     string ret = _name.symbol() + "(";
+    if ( _args.empty() ) return ret + ")";
     std::vector<Term *>::const_iterator it = _args.begin();
     for (; it != _args.end()-1; ++it)
       ret += (*it)->symbol()+", ";
@@ -30,12 +33,18 @@ public:
   }
   string value() const {
     string ret = _name.symbol() + "(";
+    if ( _args.empty() ) return ret + ")";
     std::vector<Term *>::const_iterator it = _args.begin();
     for (; it != _args.end()-1; ++it)
       ret += (*it)->value()+", ";
     ret  += (*it)->value()+")";
     return ret;
   }
+  
+  int arity() const {
+	return _args.size();
+  } // arity()
+  
 private:
   Atom _name;
   std::vector<Term *> _args;
