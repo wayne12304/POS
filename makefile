@@ -1,7 +1,7 @@
 INC_DIR = include
 
 all: hw5
-
+ 
 
 hw5: mainParser.o atom.o list.o
 
