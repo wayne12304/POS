@@ -7,7 +7,6 @@ using std::string;
 #include "list.h"
 #include "struct.h"
 #include "atom.h"
-#include "number.h"
 #include "variable.h"
 
 // When create a new list without any item
@@ -252,6 +251,35 @@ TEST (List, emptyExecptionOfTail) {
   } catch( string err ) {
 	  EXPECT_EQ(string("Accessing tail in an empty list"), err);
   }
+}
+
+TEST (List, varyVar) {
+	Variable X("X");
+	Variable Y("Y");
+	Variable Z("Z");
+	
+	Variable A("A");
+	Variable B("B");
+	Variable C("C");
+	
+	ASSERT_TRUE(X.match(Y));
+	ASSERT_TRUE(X.match(Z));
+	
+	ASSERT_TRUE(A.match(C));
+	ASSERT_TRUE(C.match(B));
+	
+	ASSERT_TRUE(A.match(B));
+	ASSERT_TRUE(X.match(A));
+	Atom name("s");
+	ASSERT_TRUE(B.match(name));
+	ASSERT_EQ("s", X.value());
+	ASSERT_EQ("s", Y.value());
+	ASSERT_EQ("s", Z.value());
+	ASSERT_EQ("s", A.value());
+	ASSERT_EQ("s", B.value());
+	ASSERT_EQ("s", C.value());
+	Atom name1("a");
+	ASSERT_FALSE(A.match(name1));
 }
 
 
