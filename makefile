@@ -56,4 +56,4 @@ stat:
 	wc *.h *.cpp
 test:
 	make utIterator
-./hw7
+	./hw7
