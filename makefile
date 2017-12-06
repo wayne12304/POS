@@ -42,5 +42,5 @@ else
 	rm -f *.o hw7
 endif
 
-stat:
+stat: 
 	wc *.h *.cpp
