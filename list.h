@@ -2,29 +2,34 @@
 #define LIST_H
 
 #include "atom.h"
-
 #include <vector>
+#include <string>
+#include <typeinfo>
+#include <iostream>
 using std::vector;
-using std::string;
+
+template <class T>
+class Iterator;
 
 class List : public Term {
 public:
-  string symbol() const;
-  string value() const;
-  bool match(Term & term);
-  
-  List (): _elements() {}
+  string symbol() const ;
+  string value() const ;
+  bool match(Term & term) ;
+public:
+  List (): _elements(0) {}
   List (vector<Term *> const & elements):_elements(elements){}
   Term * head() const;
   List * tail() const;
-  
-  bool inList(Term &term) const;
-  bool isEmpty() const;
-  int size() const;
-
+  Term * args(int index) {
+    return _elements[index];
+  }
+  int arity() const {return _elements.size();}
+  Iterator<Term *> *createIterator();
+  Iterator<Term *> *createBFSIterator();
+  Iterator<Term *> *createDFSIterator();
 private:
   vector<Term *> _elements;
-
 };
 
 #endif

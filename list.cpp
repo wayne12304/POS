@@ -1,75 +1,100 @@
+#include "atom.h"
+#include "variable.h"
+#include <typeinfo>
+#include <iostream>
+#include <string>
+#include "iterator.h"
 #include "list.h"
-
-#include <vector>
 using std::vector;
-using std::string;
 
-string List::symbol() const {
-	if ( _elements.empty() ) return "[]";
-	string ret = "[";
-    vector<Term *>::const_iterator it = _elements.begin();
-    for (; it != _elements.end()-1; ++it)
-      ret += (*it)->symbol()+", ";
-    ret  += (*it)->symbol()+"]";
+string List::symbol() const{
+    string ret ;
+    if(_elements.size()==0 ){
+      ret = "[]";
+    }
+    else{
+      ret  = "[";
+      std::vector<Term *>::const_iterator it = _elements.begin();
+      for( ; it != _elements.end()-1 ; ++it ){
+        ret += (*it)->symbol()+", ";
+      }
+      ret += (*it)->symbol()+"]";
+    }
     return ret;
+  }
+string List::value() const{
+    string ret ;
+    if(_elements.empty()){
+        ret = "[]";
+    }
+    else{
+        ret  = "[";
+        std::vector<Term *>::const_iterator it = _elements.begin();
+        for( ; it != _elements.end()-1 ; ++it ){
+        ret += (*it)->value()+", ";
+        }
+        ret += (*it)->value()+"]";
 }
-
-string List::value() const {
-	if ( _elements.empty() ) return "[]";
-	string ret = "[";
-    vector<Term *>::const_iterator it = _elements.begin();
-    for (; it != _elements.end()-1; ++it)
-      ret += (*it)->value()+", ";
-    ret  += (*it)->value()+"]";
-    return ret;
+return ret;
 }
-
 bool List::match(Term & term) {
-	List * ps = dynamic_cast<List *>(&term);
-	if ( ps ) {
-		if ( _elements.size() != ps->size() )
-			return false;
-		if ( _elements.empty() )
-			return true;
-		if ( head()->match(*(ps->head())) )
-			return tail()->match(*(ps->tail()));
-		else 
-			return false;
-	} // if
-	else {
-		return term.match(*this);
-	} // else
+    if(typeid(term) ==  typeid(List)){
+        bool ret =true;
+        List * ptrls = dynamic_cast<List*>(&term);
+        if( _elements.size() != ptrls->_elements.size() ){
+        ret = false;
+        }
+        else{
+            for(int i = 0 ; i < _elements.size() ;i++ ){
+                ret = _elements[i]->match(*(ptrls->_elements[i])) ;
+                if(ret == false)
+                    return ret;
+            }
+        }
+        return ret;
+    }
+    else if(typeid(term) == typeid(Variable)){
+        bool ret =true;
+        for(int i = 0 ; i < _elements.size() ;i++ ){
+        if(_elements[i]->symbol() ==  term.symbol()){
+            if( _elements[i]->symbol() == term.symbol() ){
+                ret= false;
+                return ret;
+            }
+        ret = _elements[i]->match(term) ;
+        }
+        if(ret == false)
+                return ret;
+        }
+        return ret;
+    }
+    else{
+        return value () == term.value();
+    }
 }
+Term * List::head() const{
+    if(_elements.empty())
+        throw std::string("Accessing head in an empty list");
 
-bool List::isEmpty() const {
-	return _elements.empty();
+    return _elements[0];
 }
-
-int List::size() const {
-	return _elements.size();
-}
-
-Term * List::head() const {
-	if ( _elements.empty() )
-		throw string( "Accessing head in an empty list" );
-	return _elements.front();
-}
-
 List * List::tail() const {
-	if ( _elements.empty() )
-		throw string( "Accessing tail in an empty list" );
-	vector<Term *> v;
-	v.assign(++_elements.begin(), _elements.end());
-	List *lptr = new List(v);
-	return lptr;
+    if(_elements.empty())
+        throw std::string("Accessing tail in an empty list");
+    vector<Term *> _clone_elements;
+    _clone_elements.assign(_elements.begin()+1, _elements.end());
+    List *ls= new List(_clone_elements) ;
+    return ls;
 }
 
-bool List::inList(Term &term) const {
-	vector<Term *>::const_iterator it = _elements.begin();
-    for (; it != _elements.end()-1; ++it) {
-		if ( (*it) == &term )
-			return true;
-	} // for
-		
-	return false;
+Iterator<Term *> *List::createIterator() {
+    return new ListIterator<Term *>(this);
+}
+
+Iterator<Term *> *List::createBFSIterator() {
+    return new BFSIterator<Term *>(this);
+}
+
+Iterator<Term *> *List::createDFSIterator() {
+    return new DFSIterator<Term *>(this);
 }
