@@ -17,21 +17,21 @@ else
 endif
 
 atom.o: atom.cpp atom.h variable.h
-	g++ -std=c++11 -c atom.cpp
+	g++ -std=gnu++0x  -c atom.cpp
 list.o:list.cpp list.h
-		g++ -std=c++11 -c list.cpp
+		g++ -std=gnu++0x -c list.cpp
 struct.o:struct.cpp struct.h
-		g++ -std=c++11 -c struct.cpp
+		g++ -std=gnu++0x  -c struct.cpp
 #exp: mainExp.o
 #	g++ -o exp mainExp.o -lgtest -lpthread
 #mainExp.o: mainExp.cpp exp.h global.h
 #	g++ -std=c++11 -c mainExp.cpp
 
 mainExpression.o: mainExpression.cpp expression.h exception.h
-	g++ -std=c++11 -c mainExpression.cpp
+	g++ -std=gnu++0x  -c mainExpression.cpp
 	
 main.o: main.cpp 
-	g++ -std=c++11 -c main.cpp
+	g++ -std=gnu++0x  -c main.cpp
 
 #utTerm: mainTerm.o term.o struct.o var.o list.o
 #	g++ -o utTerm mainTerm.o term.o var.o struct.o list.o -lgtest -lpthread
